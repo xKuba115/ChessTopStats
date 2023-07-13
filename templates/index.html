@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wybór gracza szachowego</title>
+  <style>
+    /* Stylizacja */
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    .player-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .player-list li {
+      margin-bottom: 10px;
+    }
+    
+    .check-stats-button {
+      display: block;
+      margin: 20px auto;
+      width: 150px;
+      padding: 10px;
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Wybierz gracza szachowego</h1>
+  <ul class="player-list">
+    <li><input type="checkbox" name="player" value="MagnusCarlsen"> Magnus Carlsen</li>
+    <li><input type="checkbox" name="player" value="Hikaru"> Hikaru Nakamura</li>
+    <li><input type="checkbox" name="player" value="FabianoCaruana"> Fabiano Caruana</li>
+    <li><input type="checkbox" name="player" value="Chefshouse"> Ding Liren</li>
+    <li><input type="checkbox" name="player" value="lachesisQ"> Ian Nepomniachtchi</li>
+    <li><input type="checkbox" name="player" value="Firouzja2003"> Alireza Firouzja</li>
+    <li><input type="checkbox" name="player" value="AnishGiri"> Anish Giri</li>
+    <li><input type="checkbox" name="player" value="GMWSO"> Wesley So</li>
+    <li><input type="checkbox" name="player" value="Lordillidan"> Richard Rapport</li>
+    <li><input type="checkbox" name="player" value="Polish_fighter3000"> Jan Krzysztof Duda</li>
+  </ul>
+  <a class="check-stats-button" href="#" onclick="checkStats()">Check Stats</a>
+<p id="stats"></p>
+  <script>
+    var checkboxes = document.querySelectorAll('input[name="player"]');
+    var maxChecked = 2;
+    
+    function checkStats() {
+      var selectedPlayers = document.querySelectorAll('input[name="player"]:checked');
+      var selectedPlayerNames = Array.from(selectedPlayers).map(function(player) {
+        return player.value;
+      });
+      
+      
+      console.log('Wybrane gracze:', selectedPlayerNames);
+      var url = 'http://127.0.0.1:3000/stats';
+var params = `firstPlayer=${selectedPlayerNames[0]}&secondPlayer=${selectedPlayerNames[1]}`;
+
+fetch(url + '?' + params)
+  .then(function(response) {
+    if (response.ok) {
+      return response.text();
+    } else {
+      throw new Error('Błąd sieciowy: ' + response.status);
+    }
+  })
+  .then(function(data) {
+    
+    var statsParagraph = document.getElementById('stats');
+    statsParagraph.textContent = data;
+
+  })
+  .catch(function(error) {
+    console.error('Wystąpił błąd:', error);
+  });
+    }
+    
+    checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener('change', function() {
+        var selectedPlayers = document.querySelectorAll('input[name="player"]:checked');
+        if (selectedPlayers.length > maxChecked) {
+          this.checked = false;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
