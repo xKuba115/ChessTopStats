@@ -1,28 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wybór gracza szachowego</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <title>ChessTopStats</title>
   <style>
     /* Stylizacja */
 
     body {
-      font-family: Arial, sans-serif;
-    }
-    
+      font-family: 'Courier New', monospace;
+    text-align: center;
+    margin: 0;
+    position: relative;
+}
+
+.color-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: rgba(0, 200, 0, 0.4); 
+    z-index: -1;
+    display: flex; 
+}
+
+.right-color {
+    background-color: #ec5353 ;
+    width: 50%;
+    min-height: 100%;
+    margin-left: auto;
+}
     h1 {
       text-align: center;
+      position: relative;
+    z-index: 1;
     }
     
     .player-list {
       list-style-type: none;
       padding: 0;
+      position: relative;
+    z-index: 1;
     }
     
     .player-list li {
       margin-bottom: 10px;
+      position: relative;
+    z-index: 1;
     }
     
     .check-stats-button {
+      position: relative;
+    z-index: 1;
       display: block;
       margin: 20px auto;
       width: 150px;
@@ -33,12 +63,27 @@
       text-decoration: none;
       border-radius: 5px;
     }
+    
+
+h1,
+.player-list,
+.check-stats-button {
+    position: relative;
+    z-index: 1; 
+}
+li,p{
+  font-size:20px;
+}
   </style>
 </head>
-<body>
-  <h1>Wybierz gracza szachowego</h1>
+
+  <body>
+    <div class="color-container">
+      <div class="right-color"></div>
+    </div>
+  <h1>Choose 2 chess players and check out their games on chess.com</h1>
   <ul class="player-list">
-    <li><input type="checkbox" name="player" value="MagnusCarlsen"> Magnus Carlsen</li>
+    <li><input type="checkbox" name="player" value="MagnusCarlsen">  Magnus Carlsen</li>
     <li><input type="checkbox" name="player" value="Hikaru"> Hikaru Nakamura</li>
     <li><input type="checkbox" name="player" value="FabianoCaruana"> Fabiano Caruana</li>
     <li><input type="checkbox" name="player" value="Chefshouse"> Ding Liren</li>
@@ -51,7 +96,12 @@
   </ul>
   <a class="check-stats-button" href="#" onclick="checkStats()">Check Stats</a>
 <p id="stats"></p>
+<canvas id="myChart" width="400" height="400"></canvas>
   <script>
+
+
+
+
     var checkboxes = document.querySelectorAll('input[name="player"]');
     var maxChecked = 2;
     
@@ -75,9 +125,14 @@ fetch(url + '?' + params)
     }
   })
   .then(function(data) {
-    
+    var parts = data.split("!");
+    var percentage = parts[1];
+    console.log(percentage);
+    var rightColor = document.querySelector(".right-color");
+    rightColor.style.width = percentage + "%";
     var statsParagraph = document.getElementById('stats');
-    statsParagraph.textContent = data;
+    statsParagraph.textContent = parts[0];
+    
 
   })
   .catch(function(error) {

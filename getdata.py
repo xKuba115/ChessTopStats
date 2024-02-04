@@ -4,7 +4,7 @@ import pymongo
 gameList = []
 #FUNCTIONS
 nickname = 'Polish_fighter3000'
-client = pymongo.MongoClient("connectionstring")
+client = pymongo.MongoClient("x")
 db = client["Chess"]
 collection = db[f"{nickname}Games"]
 
