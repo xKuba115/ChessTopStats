@@ -1,8 +1,8 @@
-#ChessTopStats
+# ChessTopStats
 
 This project is a website that utilizes Python as its backend. It fetches information from the Chess.com API regarding the top 10 chess players, processes and stores the data in a NoSQL MongoDB database, and then provides a Flask-based API in Python. This API, when given the names of two players, returns their game records against each other on Chess.com. The results are displayed on an HTML/CSS/JS webpage.
 
-##Project Overview
+## Project Overview
 The Chess.com Player Stats Website is designed to provide users with easy access to the game records of the top 10 chess players on Chess.com. The project consists of the following components:
 
 Backend in Python: The project's backend is built using Python. It is responsible for fetching data from the Chess.com API and processing it for storage and retrieval.
@@ -15,7 +15,7 @@ Flask API: A Flask-based API has been implemented in Python to provide a user-fr
 
 HTML/CSS/JS Webpage: The website's frontend is developed using HTML, CSS, and JavaScript. It allows users to pick the names of two players, triggers the API call to retrieve their game records, and displays the results on the webpage.
 
-##Dependencies
+## Dependencies
 Python
 Flask
 pymongo (Python driver for MongoDB)
