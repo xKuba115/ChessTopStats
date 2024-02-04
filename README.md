@@ -16,8 +16,8 @@ Flask API: A Flask-based API has been implemented in Python to provide a user-fr
 HTML/CSS/JS Webpage: The website's frontend is developed using HTML, CSS, and JavaScript. It allows users to pick the names of two players, triggers the API call to retrieve their game records, and displays the results on the webpage.
 
 ## Dependencies
-Python
-Flask
-pymongo (Python driver for MongoDB)
-HTML/CSS/JS for frontend
-Chess.com API
+Python  
+Flask  
+pymongo (Python driver for MongoDB)  
+HTML/CSS/JS for frontend  
+Chess.com API  
